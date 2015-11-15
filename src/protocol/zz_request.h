@@ -36,8 +36,11 @@ public:
 	typedef QHash<QString, QVariant> t_RequestData;
 
 public:
-	//! Constructor for derived classes
-	inline CRequest( ERequestType eType );
+	//! Default Constructor
+	inline CRequest( ERequestType eType = ERequestType::Undefined );
+	//! Construct from the byte data
+	//! Data buffer should contain only the data part (without header)
+	inline CRequest( ERequestType eType, QByteArray& aDataBuffer );
 	//! Destructor
 	virtual ~CRequest();
 
@@ -48,33 +51,32 @@ public:
 	// Returns request type
 	inline ERequestType   getType() const;
 	// Returns request status
-	inline ERequestStatus getRequestStatus() const;
+	// inline ERequestStatus getRequestStatus() const;
 	// Checks request validation
 	inline bool isValid() const;
 	// Add data item
 	inline void addItem( QString const& sKey, QVariant const& vtValue );
 	// Remove data item
 	inline void removeItem( QString const& sKey );
-	// Get value of data item
-	inline QVariant getValue( QString const& sKey ) const;
 	// Get item Count
 	inline int  getItemCount() const;
 	// Is there any items 
 	inline bool isEmpty();
+	// Get value of data item
+	inline QVariant getValue( QString const& sKey ) const;
 	// Returns all item keys
-	inline QStringList     getAllKeys() const;
+	inline QStringList getAllKeys() const;
 	// Returns all item values
 	inline QList<QVariant> getAllValues() const;
 
-	// Returns data buffer which is ready to be transmitted
-	virtual QByteArray  getBuffer() const;
+	// Serializes and returns data buffer which is ready to be transmitted
+	QByteArray serialize() const;
 
 private:
 	//
 	//	Content
 	//
 	ERequestType   m_eType;
-	ERequestStatus m_eStatus;
 	t_RequestData  m_hshData;
 };
 ////////////////////////////////////////////////////////////////////////////////
@@ -89,51 +91,55 @@ private:
 inline CRequest::CRequest( ERequestType eType )
 	: m_eType(eType)
 {}
+
+//! Constructor
+inline CRequest::CRequest( ERequestType eType, QByteArray& aDataBuffer )
+	: m_eType( isValidRequest(eType)? eType : ERequestType::Undefined )
+{
+	QDataStream oIn( &aDataBuffer, QIODevice::ReadOnly );
+	oIn >> m_hshData;
+}
+
 // getType
 inline ERequestType CRequest::getType() const { return m_eType; }
 // isValid
-inline bool CRequest::isValid() const { return m_eType != ERequestType::Undefined; }
+inline bool CRequest::isValid() const { return isValidRequest( m_eType ); }
 
-
-////////////////////////////////////////////////////////////////////////////////
-//
-//	class CLoginRequest
-//
-class CLoginRequest : public CRequest
+// addItem
+inline void CRequest::addItem( QString const& sKey, QVariant const& vtValue )
 {
-	// Base definition
-	typedef CRequest Base;
-
-public:
-	//! Constructor for derived classes
-	inline CLoginRequest( ERequestType eType );
-	//! Destructor
-	virtual ~CLoginRequest();
-
-public:
-	//
-	//	Main Interface
-	//
-	// Get request type
-	inline ERequestType getType() const;
-	// Checks request validation
-	inline bool         isValid() const;
-	// Returns data buffer which is ready to be transmitted
-	virtual QByteArray  getBuffer() const = 0;
-
-private:
-	//
-	//	Content
-	//
-	ERequestType m_eType;
-};
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-//
-//	Inline Implementations
-//
-////////////////////////////////////////////////////////////////////////////////
+	m_hshData.insert(sKey, vtValue);
+}
+// removeItem
+inline void CRequest::removeItem( QString const& sKey )
+{
+	m_hshData.remove( sKey );
+}
+// getValue
+inline QVariant CRequest::getValue( QString const& sKey ) const
+{
+	return m_hshData.value( sKey );
+}
+// getItemCount
+inline int  CRequest::getItemCount() const
+{
+	return m_hshData.size();
+}
+// isEmpty
+inline bool CRequest::isEmpty()
+{
+	return m_hshData.isEmpty();
+}
+// getAllKeys
+inline QStringList CRequest::getAllKeys() const
+{
+	return m_hshData.keys();
+}
+// getAllValues
+inline QList<QVariant> CRequest::getAllValues() const
+{
+	return m_hshData.values();
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////

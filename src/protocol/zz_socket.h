@@ -1,0 +1,83 @@
+/*
+	File: 
+		zz_socket.h
+	Abstract:
+		Defines convenient interface to transmit zz requests 
+*/
+
+#ifndef ZZ_SOCKET_H
+#define ZZ_SOCKET_H
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	Includes
+//
+#ifndef ZZ_CORE_H
+#	include "zz_core.h"
+#endif
+
+#ifndef ZZ_REQUEST_H
+#	include "zz_request.h"
+#endif
+
+// Qt includes
+#include <QTcpSocket>
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+namespace zz { //
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	class CSocket
+//!	TCP socket class which allows request transmission
+class CSocket : public QTcpSocket 
+{	
+public:
+	//!	Constructor
+	inline CSocket( QObject* pParent = nullptr );
+	virtual ~CSocket();
+
+public:
+	//
+	//	Extended Methods
+	//
+	// Send Request
+	inline void writeRequest( CRequest const* pRequest );
+	// Receive Request
+	CRequest* readRequest();
+};
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	Inline Implementations
+//
+////////////////////////////////////////////////////////////////////////////////
+//! Constructor
+inline CSocket::CSocket(QObject* pParent)
+	: QTcpSocket( pParent )
+{}
+
+// writeRequest
+inline void zz::CSocket::writeRequest( CRequest const* pRequest )
+{
+	if(!pRequest)
+		return;
+	QByteArray aBuffer = pRequest->serialize();
+	qint64 nWrittenBytes = write( aBuffer );
+	// Synchrony
+	if( nWrittenBytes != aBuffer.size() || !waitForBytesWritten())
+	{
+		QString sErrMsg = errorString();
+		throw CException( sErrMsg );
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+} // namespace zz
+////////////////////////////////////////////////////////////////////////////////
+
+#endif // ZZ_REQUEST_H
+/* end of file */
