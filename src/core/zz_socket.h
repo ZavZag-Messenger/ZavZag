@@ -32,7 +32,7 @@ namespace zz { //
 //
 //	class CSocket
 //!	TCP socket class which allows request transmission
-class CSocket : public QTcpSocket 
+class ZZ_CORE_EXPORT CSocket : public QTcpSocket
 {	
 public:
 	//!	Constructor
@@ -46,7 +46,7 @@ public:
 	// Send Request
 	inline void writeRequest( CRequest const* pRequest );
 	// Receive Request
-	CRequest* readRequest();
+	CRequest*   readRequest();
 };
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -29,7 +29,7 @@ namespace zz { //
 //
 //	class CRequest
 //!	Base class for all request types
-class CRequest
+class ZZ_CORE_EXPORT CRequest
 {
 public:
 	// Request data definition
