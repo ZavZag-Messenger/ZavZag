@@ -1,5 +1,5 @@
 build/*
-/*/GeneratedFiles/* 
+src/*/GeneratedFiles/* 
 *.opensdf
 *.sdf
 *.suo

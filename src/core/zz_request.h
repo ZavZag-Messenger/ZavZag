@@ -15,9 +15,6 @@
 #ifndef ZZ_CORE_H
 #	include "zz_core.h"
 #endif
-
-//	Qt includes
-
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,9 +28,8 @@ namespace zz { //
 //!	Base class for all request types
 class ZZ_CORE_EXPORT CRequest
 {
-public:
 	// Request data definition
-	typedef QHash<QString, QVariant> t_RequestData;
+	typedef QHash<t_KeyType, QVariant> t_RequestData;
 
 public:
 	//! Default Constructor
@@ -55,17 +51,17 @@ public:
 	// Checks request validation
 	inline bool isValid() const;
 	// Add data item
-	inline void addItem( QString const& sKey, QVariant const& vtValue );
+	inline void addItem( t_KeyType sKey, QVariant const& vtValue );
 	// Remove data item
-	inline void removeItem( QString const& sKey );
+	inline void removeItem( t_KeyType sKey );
 	// Get item Count
 	inline int  getItemCount() const;
 	// Is there any items 
 	inline bool isEmpty();
 	// Get value of data item
-	inline QVariant getValue( QString const& sKey ) const;
+	inline QVariant getValue( t_KeyType sKey ) const;
 	// Returns all item keys
-	inline QStringList getAllKeys() const;
+	inline QList<t_KeyType> getAllKeys( ) const;
 	// Returns all item values
 	inline QList<QVariant> getAllValues() const;
 
@@ -94,7 +90,7 @@ inline CRequest::CRequest( ERequestType eType )
 
 //! Constructor
 inline CRequest::CRequest( ERequestType eType, QByteArray& aDataBuffer )
-	: m_eType( isValidRequest(eType)? eType : ERequestType::Undefined )
+	: m_eType( isValidRequestType(eType)? eType : ERequestType::Undefined )
 {
 	QDataStream oIn( &aDataBuffer, QIODevice::ReadOnly );
 	oIn >> m_hshData;
@@ -103,20 +99,20 @@ inline CRequest::CRequest( ERequestType eType, QByteArray& aDataBuffer )
 // getType
 inline ERequestType CRequest::getType() const { return m_eType; }
 // isValid
-inline bool CRequest::isValid() const { return isValidRequest( m_eType ); }
+inline bool CRequest::isValid() const { return isValidRequestType( m_eType ); }
 
 // addItem
-inline void CRequest::addItem( QString const& sKey, QVariant const& vtValue )
+inline void CRequest::addItem( t_KeyType sKey, QVariant const& vtValue )
 {
 	m_hshData.insert(sKey, vtValue);
 }
 // removeItem
-inline void CRequest::removeItem( QString const& sKey )
+inline void CRequest::removeItem( t_KeyType sKey )
 {
 	m_hshData.remove( sKey );
 }
 // getValue
-inline QVariant CRequest::getValue( QString const& sKey ) const
+inline QVariant CRequest::getValue( t_KeyType sKey ) const
 {
 	return m_hshData.value( sKey );
 }
@@ -131,7 +127,7 @@ inline bool CRequest::isEmpty()
 	return m_hshData.isEmpty();
 }
 // getAllKeys
-inline QStringList CRequest::getAllKeys() const
+inline QList<t_KeyType> CRequest::getAllKeys( ) const
 {
 	return m_hshData.keys();
 }

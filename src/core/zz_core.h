@@ -77,7 +77,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
-namespace zz { // ZavZag :P
+namespace zz { // [Z]av[Z]ag :P
 ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -119,31 +119,42 @@ enum class ERequestType
 //
 //	Request Keys
 //
-enum class ERequestKeys
-{
-	// User Info
-	FirstName = 0, // QString
-	LastName,      // QString
-	Username,      // QString
-	Password,      // QString
-	Birthday,      // QDateTime
-	Gender,        // Bool : true-Male | false-Female
-	Avatar,        // QImage
+//enum class ERequestKeys
+//{
+//	// User Info
+//	FirstName = 0, // QString
+//	LastName,      // QString
+//	Username,      // QString
+//	Password,      // QString
+//	Birthday,      // QDateTime
+//	Gender,        // Bool : true-Male | false-Female
+//	Avatar,        // QImage
+//
+//	ErrorMessage   // Error Message
+//};
 
-
-	ErrorMessage
-};
+// Key type definition
+typedef char* t_KeyType;
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace keys {// Keys for the values of request
 ////////////////////////////////////////////////////////////////////////////////
 
-//static const char* cszUsername = "__username";
-//static const char* cszPassword = "__password";
-//static const char* cszBirthday = "__birthday";
+// Authentication
+static const char* cszUsername;
+static const char* cszPassword;
+// User Info
+static const char* cszFirstName;
+static const char* cszLastName;
+static const char* cszBirthday;
+static const char* cszGender;
+// Other
+static const char* cszErrorMessage;
+
 ////////////////////////////////////////////////////////////////////////////////
 } // namespace keys
 ////////////////////////////////////////////////////////////////////////////////
+
 
 //
 //	Request Status
@@ -161,7 +172,7 @@ namespace keys {// Keys for the values of request
 //	Useful Tool Functions
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline bool isValidRequest( ERequestType eType )
+inline bool isValidRequestType( ERequestType eType )
 {
 	switch ( eType )
 	{

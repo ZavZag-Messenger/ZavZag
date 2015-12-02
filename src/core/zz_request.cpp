@@ -19,8 +19,25 @@
 |   Type    | Size: N| Variant Hash... |
 |   1 Byte  | 4 Byte |     N Byte      |
 +======================================+
-
 */
+
+//
+//  Initialization of request keys 
+//
+////////////////////////////////////////////////////////////////////////////////
+namespace keys {// Keys for the values of request
+////////////////////////////////////////////////////////////////////////////////
+
+static const char* cszUsername     = "__username";
+static const char* cszPassword     = "__password";
+static const char* cszFirstName    = "__first_name";
+static const char* cszLastName     = "__last_name";
+static const char* cszBirthday     = "__birthday";
+static const char* cszGender       = "__gender";
+static const char* cszErrorMessage = "__error_message";
+////////////////////////////////////////////////////////////////////////////////
+} // namespace keys
+////////////////////////////////////////////////////////////////////////////////
 
 //
 //	class CRequest
