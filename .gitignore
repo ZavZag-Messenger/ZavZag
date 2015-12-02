@@ -1,5 +1,6 @@
 build/*
-
+/*/GeneratedFiles/* 
 *.opensdf
 *.sdf
 *.suo
+*.user
