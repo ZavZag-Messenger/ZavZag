@@ -1,0 +1,69 @@
+/*
+File:
+    srv_datamanager.cpp
+Abstract:
+	Implementation file for Data Manager 
+*/
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	Includes
+//
+#include "srv_datamanager.h"
+//	Qt includes
+#include <QDir>
+////////////////////////////////////////////////////////////////////////////////
+
+//
+//  Static Member Initialization
+//
+const QLatin1String srv::CDataManager::m_csDataFilePath = QLatin1String( "data/" );
+const QLatin1String srv::CDataManager::m_csDataFileName = QLatin1String( "data.sqlite" );
+
+//
+//  class CDataManager
+//
+
+// initialize
+void srv::CDataManager::initialize()
+{
+	bool bCreateTables = false;
+	// Chack data file existance
+	QDir oDataFileDir;
+	QString sFilePath = m_csDataFilePath + m_csDataFileName;
+	if (!oDataFileDir.exists( sFilePath ))
+	{
+		if(!oDataFileDir.mkpath( m_csDataFilePath ))
+			throw zz::CException( zz::qtr( "Unable to create path" ));
+		bCreateTables = true;
+	}
+
+	// Create SQlite connection
+	m_oDB = QSqlDatabase::addDatabase( "QSQLITE" );
+	m_oDB.setDatabaseName( sFilePath );
+	if (!m_oDB.open())
+	{
+		QString sErrMsg = m_oDB.lastError().driverText();
+		throw zz::CException( zz::qtr( "Unable to establish database connection: " )
+			.append( sErrMsg ) );
+	}
+	
+	// Create DB Infrastructure if necessary
+	if (bCreateTables)
+		createDBInfrastructure();
+}
+
+//	createDBInfrastructure
+void srv::CDataManager::createDBInfrastructure()
+{
+	QSqlQuery oQuery;
+	// Create Table user_info
+	oQuery.exec( "CREATE TABLE user_info ("
+				 "user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+				 "first_name TEXT NOT NULL, "
+				 "last_name TEXT NOT NULL, "
+				 "birthday DATE NOT NULL, "
+				 "gender BOOLEAN NOT NULL, "
+				 "avatar BLOB);" );
+	checkExecution( oQuery );
+}

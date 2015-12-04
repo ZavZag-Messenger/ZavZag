@@ -4,3 +4,4 @@ src/*/GeneratedFiles/*
 *.sdf
 *.suo
 *.user
+*.sqlite

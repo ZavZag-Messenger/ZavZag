@@ -13,10 +13,15 @@ Abstract:
 //
 //	Includes
 //
+#ifndef ZZ_CORE_H
+#   include "zz_core.h"
+#endif
 
 //	Qt includes
 #include <QSqlDataBase>
 #include <QSqlQuery>
+#include <QSqlQuery>
+#include <QSqlError>
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -44,12 +49,27 @@ public:
 	//
 	//	Main Interface
 	//
-	
+
+protected:
+	//
+	//  Tools Methods
+	//
+	// Creates DB connection and makes all necesary tables if not exist
+	void initialize();
+	void createDBInfrastructure();
+
+	// If execution fails throws an exception with error message
+	inline void checkExecution( QSqlQuery const& query );
 
 private:
 	//
 	//	Content
 	//
+	QSqlDatabase m_oDB;
+
+	// 
+	static const QLatin1String m_csDataFileName;
+	static const QLatin1String m_csDataFilePath;
 
 };
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,9 +82,23 @@ private:
 
 //! Constructor
 inline CDataManager::CDataManager()
+{
+	initialize();
+}
+
+//! Destructor
+inline CDataManager::~CDataManager()
 {}
 
-
+// checkExecution
+inline void CDataManager::checkExecution( QSqlQuery const& query )
+{
+	if (!query.isActive())
+	{
+		QString sErrMsg = query.lastError().databaseText();
+		throw zz::CException( zz::qtr( "DB Query Failed: " ).append( sErrMsg ) );
+	}
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 } // namespace srv
