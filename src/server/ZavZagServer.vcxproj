@@ -107,7 +107,7 @@
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Sqld.lib;Qt5Widgetsd.lib;zz_core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)..\..\build\$(Configuration)-win-$(Platform)\bin\$(ProjectName).exe </Command>
+      <Command>copy "$(OutputPath)$(ProjectName).exe" "$(OutputPath)..\$(ProjectName).exe" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
