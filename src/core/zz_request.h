@@ -29,11 +29,12 @@ namespace zz { //
 class ZZ_CORE_EXPORT CRequest
 {
 	// Request data definition
-	typedef QHash<t_KeyType, QVariant> t_RequestData;
+	//typedef QHash<t_KeyType, QVariant> t_RequestData;
 
 public:
-	//! Default Constructor
-	inline CRequest( ERequestType eType = ERequestType::Undefined );
+	//! Constructor
+	inline CRequest( ERequestType eType, 
+					 t_RequestData const& hshData = t_RequestData() );
 	//! Construct from the byte data
 	//! Data buffer should contain only the data part (without header)
 	inline CRequest( ERequestType eType, QByteArray& aDataBuffer );
@@ -84,8 +85,10 @@ private:
 ////////////////////////////////////////////////////////////////////////////////
 
 //! Constructor
-inline CRequest::CRequest( ERequestType eType )
-	: m_eType(eType)
+inline CRequest::CRequest( ERequestType eType, 
+						   t_RequestData const& hshData )
+	: m_eType(eType),
+	  m_hshData( hshData )
 {}
 
 //! Constructor

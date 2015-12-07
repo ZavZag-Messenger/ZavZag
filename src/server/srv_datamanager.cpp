@@ -59,11 +59,43 @@ void srv::CDataManager::createDBInfrastructure()
 	QSqlQuery oQuery;
 	// Create Table user_info
 	oQuery.exec( "CREATE TABLE user_info ("
-				 "user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-				 "first_name TEXT NOT NULL, "
-				 "last_name TEXT NOT NULL, "
-				 "birthday DATE NOT NULL, "
-				 "gender BOOLEAN NOT NULL, "
-				 "avatar BLOB);" );
+				 "user_id    INTEGER PRIMARY KEY AUTOINCREMENT, "
+				 "first_name TEXT    NOT NULL, "
+				 "last_name  TEXT    NOT NULL, "
+				 "birthday   DATE    NOT NULL, "
+				 "gender     BOOLEAN NOT NULL, "
+				 "avatar     BLOB);" );
+	checkExecution( oQuery );
+
+	// Create Auth Table
+	oQuery.exec( "CREATE TABLE auth_info ("
+				 "auth_id  INTEGER PRIMARY KEY AUTOINCREMENT, "
+				 "username TEXT    NOT NULL UNIQUE, "
+				 "password INTEGER NOT NULL, "
+				 "user_id  INTEGER NOT NULL UNIQUE);" );
+	checkExecution( oQuery );
+
+	// Create Friendship Table
+	oQuery.exec( "CREATE TABLE friendship ("
+				 "friendship_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+				 "user_id       INTEGER NOT NULL, "
+				 "friend_id     INTEGER NOT NULL);" );
+	checkExecution( oQuery );
+
+	// Create Conversation Table
+	oQuery.exec( "CREATE TABLE conversation ("
+				 "conv_id    INTEGER PRIMARY KEY AUTOINCREMENT, "
+				 "table_name TEXT NOT NULL);" );
+	checkExecution( oQuery );
+
+	// Create Messages Table
+	oQuery.exec( "CREATE TABLE messages ("
+				 "conv_id   INTEGER  NOT NULL, "
+				 "user_id   INTEGER  NOT NULL, "
+				 "message   TEXT     NOT NULL, "
+				 "send_time DATETIME );" );
 	checkExecution( oQuery );
 }
+
+
+

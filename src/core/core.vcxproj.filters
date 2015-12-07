@@ -28,12 +28,20 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{36e9238e-e5ef-46ac-b294-408e70e50bb4}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="zz_core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="zz_request.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zz_friendlist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="zz_socket.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="zz_utility.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

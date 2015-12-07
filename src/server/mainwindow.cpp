@@ -17,6 +17,7 @@ CMainWindow::~CMainWindow()
 
 void CMainWindow::onCreateTables()
 {
+	uint nHash = qHash( QString( "Aramamv@mail.ru" ) );
 	try
 	{
 		m_pDataManager.reset( new srv::CDataManager( ) );

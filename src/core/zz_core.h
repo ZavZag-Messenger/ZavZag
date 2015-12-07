@@ -133,23 +133,34 @@ enum class ERequestType
 //	ErrorMessage   // Error Message
 //};
 
-// Key type definition
-typedef char* t_KeyType;
+//
+//  Key type definition
+//
+typedef QString t_KeyType;
+
+//
+//	Request Data Type Definition
+//	
+typedef QHash<t_KeyType, QVariant> t_RequestData;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace keys {// Keys for the values of request
 ////////////////////////////////////////////////////////////////////////////////
 
 // Authentication
-static const char* cszUsername;
-static const char* cszPassword;
+static const QString sUsername;
+static const QString sPassword;
 // User Info
-static const char* cszFirstName;
-static const char* cszLastName;
-static const char* cszBirthday;
-static const char* cszGender;
+static const QString sFirstName;
+static const QString sLastName;
+static const QString sBirthday;
+static const QString sGender;
+static const QString sAvatar;
+static const QString sFriendList;
+
 // Other
-static const char* cszErrorMessage;
+static const QString sErrorMessage;
 
 ////////////////////////////////////////////////////////////////////////////////
 } // namespace keys
@@ -159,13 +170,23 @@ static const char* cszErrorMessage;
 //
 //	Request Status
 //
-//enum class ERequestStatus
-//{
-//	Unknown = 0,
-//	Succeeded,
-//	Failed,
-//	Canceled
-//};
+enum class ERequestStatus
+{
+	Unknown = 0,
+	Succeeded,
+	Failed,
+	Canceled
+};
+
+//
+//	Gender Definition
+//
+enum class EGender
+{
+	Undefined = 0,
+	Male,
+	Female
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 //

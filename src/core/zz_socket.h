@@ -116,5 +116,5 @@ inline void CSocket::onBytesWritten( qint64 nWrittenBytes )
 } // namespace zz
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // ZZ_REQUEST_H
+#endif // ZZ_SOCKET_H
 /* end of file */

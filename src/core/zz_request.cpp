@@ -28,13 +28,15 @@
 namespace keys {// Keys for the values of request
 ////////////////////////////////////////////////////////////////////////////////
 
-static const char* cszUsername     = "__username";
-static const char* cszPassword     = "__password";
-static const char* cszFirstName    = "__first_name";
-static const char* cszLastName     = "__last_name";
-static const char* cszBirthday     = "__birthday";
-static const char* cszGender       = "__gender";
-static const char* cszErrorMessage = "__error_message";
+static const QString sUsername     = "__username";
+static const QString sPassword     = "__password";
+static const QString sFirstName    = "__first_name";
+static const QString sLastName     = "__last_name";
+static const QString sBirthday     = "__birthday";
+static const QString sGender       = "__gender";
+static const QString sErrorMessage = "__error_message";
+static const QString sAvatar       = "__avatar";
+static const QString sFriendList   = "__friend_list";
 ////////////////////////////////////////////////////////////////////////////////
 } // namespace keys
 ////////////////////////////////////////////////////////////////////////////////
