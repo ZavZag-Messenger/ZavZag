@@ -17,12 +17,15 @@ Abstract:
 #   include "zz_core.h"
 #endif
 
+#ifndef ZZ_UTILITY_H
+#	include "zz_utility.h"
+#endif
+
 //	Qt includes
 #include <QSqlDataBase>
 #include <QSqlQuery>
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QImage>
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,18 +56,12 @@ public:
 	// Registers a new user
 	// In case of success returns id of the new user, 
 	// otherwise throws an exception 
-	uint registerUser( QString const& sUsername,
-					   uint           unPwdHash,
-					   QString const& sFirstName,
-					   QString const& sLastName,
-					   QDate   const& dtBirthday,
-					   zz::EGender    eGender,
-					   QImage  const& imgAvatar = QImage() );
+	uint registerUser( zz::CUserInfo, uint unPwdHash );
 	// Checks whether the username is free
 	bool isUsernameFree( QString const& sUsername ) const;
-
-	bool login( QString const& sUsername,
-				uint           unPwdHash );
+	// Login
+	zz::CUserInfo login( QString const& sUsername,
+				         uint           unPwdHash );
 
 
 
