@@ -63,7 +63,7 @@ void srv::CDataManager::createDBInfrastructure()
 				 "first_name TEXT    NOT NULL, "
 				 "last_name  TEXT    NOT NULL, "
 				 "birthday   DATE    NOT NULL, "
-				 "gender     BOOLEAN NOT NULL, "
+				 "gender     INTEGER NOT NULL, "
 				 "avatar     BLOB);" );
 	checkExecution( oQuery );
 
@@ -88,6 +88,12 @@ void srv::CDataManager::createDBInfrastructure()
 				 "table_name TEXT NOT NULL);" );
 	checkExecution( oQuery );
 
+	// Create Conversation Info Table
+	oQuery.exec( "CREATE TABLE conversation_info ("
+				 "user_id INTEGER NOT NULL, "
+				 "conv_id INTEGER NOT NULL);" );
+	checkExecution( oQuery );
+
 	// Create Messages Table
 	oQuery.exec( "CREATE TABLE messages ("
 				 "conv_id   INTEGER  NOT NULL, "
@@ -99,3 +105,24 @@ void srv::CDataManager::createDBInfrastructure()
 
 
 
+//	registerUser
+uint srv::CDataManager::registerUser( zz::CUserInfo const& info, uint unPwdHash )
+{
+	QString sfName = info.getFirstName();
+	ZZ_ASSERT( !sfName.isEmpty() );
+	QString slName = info.getLastName();
+	ZZ_ASSERT( !slName.isEmpty( ) );
+	QDate oBrDay = info.getBirthday();
+	ZZ_ASSERT( oBrDay.isValid() );
+	QString sDate = oBrDay.toString( QString( "yyyy-MM-dd" ) );
+	zz::EGender eGender = info.getGender();
+	//ZZ_ASSERT( eGender != zz::EGender::Undefined );
+
+	QSqlQuery oQuery;
+	oQuery.exec( QString( "INSERT INTO user_info"
+				             "(first_name, last_name, birthday, gender) VALUES"
+							 "(      '%1',      '%2',     '%3',     %4);" )
+							 .arg( sfName ).arg( slName ).arg( sDate ).arg( int( eGender ) ) );
+	checkExecution( oQuery );
+	return 0;
+}

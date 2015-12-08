@@ -82,7 +82,7 @@ public:
 	//	Converters
 	//	
 	// Converts User Info to Request Data type 
-	t_RequestData toRequestData() const;
+	inline t_RequestData toRequestData() const;
 
 private:
 	//
@@ -100,6 +100,16 @@ private:
 //! Default Constructor
 inline CUserInfo::CUserInfo()
 {}
+//!
+inline CUserInfo::CUserInfo( t_RequestData const& hshData )
+	: m_hshData( hshData )
+{}
+//! Destructor
+inline CUserInfo::~CUserInfo()
+{}
+
+// toRequestData
+inline t_RequestData CUserInfo::toRequestData() const { return m_hshData; }
 
 // setUsername
 inline void CUserInfo::setUsername( QString const& sUsername )

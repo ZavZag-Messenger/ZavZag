@@ -56,12 +56,17 @@ public:
 	// Registers a new user
 	// In case of success returns id of the new user, 
 	// otherwise throws an exception 
-	uint registerUser( zz::CUserInfo, uint unPwdHash );
-	// Checks whether the username is free
-	bool isUsernameFree( QString const& sUsername ) const;
-	// Login
-	zz::CUserInfo login( QString const& sUsername,
-				         uint           unPwdHash );
+	uint registerUser( zz::CUserInfo const&, uint unPwdHash );
+	// Checks whether the username exsists
+	bool isUsernameExists( QString const& sUsername ) const;
+	// Returnes user ID which coresspondes 
+	// to the specified username and password hash.
+	// If user not found returns 0.
+	uint getUserId( QString const& sUsername,
+					uint           unPwdHash );
+
+	// Retusrnes user info 
+	zz::CUserInfo getUserInfo( uint unUserId );
 
 
 
@@ -99,6 +104,13 @@ private:
 inline CDataManager::CDataManager()
 {
 	initialize();
+	zz::CUserInfo info;
+	info.setFirstName( "Aram" );
+	info.setLastName( "Hakhverdyan" );
+	info.setGender( zz::EGender::Male );
+	//info.setBirthday( QDate( 1995, 3, 16 ) );
+
+	registerUser( info, 656848 );
 }
 
 //! Destructor
