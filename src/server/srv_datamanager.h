@@ -108,8 +108,8 @@ inline CDataManager::CDataManager()
 	info.setFirstName( "Aram" );
 	info.setLastName( "Hakhverdyan" );
 	info.setGender( zz::EGender::Male );
-	//info.setBirthday( QDate( 1995, 3, 16 ) );
-
+	info.setBirthday( QDate( 1995, 3, 16 ) );
+	// 
 	registerUser( info, 656848 );
 }
 

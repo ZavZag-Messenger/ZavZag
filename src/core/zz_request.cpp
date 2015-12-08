@@ -10,7 +10,6 @@
 //	Includes
 //
 #include "zz_request.h"
-#include "zz_utility.h"
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
@@ -25,22 +24,22 @@
 //
 //  Initialization of request keys 
 //
-////////////////////////////////////////////////////////////////////////////////
-namespace keys {// Keys for the values of request
-////////////////////////////////////////////////////////////////////////////////
-
-static const QString sUsername     = "__username";
-static const QString sPassword     = "__password";
-static const QString sFirstName    = "__first_name";
-static const QString sLastName     = "__last_name";
-static const QString sBirthday     = "__birthday";
-static const QString sGender       = "__gender";
-static const QString sErrorMessage = "__error_message";
-static const QString sAvatar       = "__avatar";
-static const QString sFriendList   = "__friend_list";
-////////////////////////////////////////////////////////////////////////////////
-} // namespace keys
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+//namespace keys {// Keys for the values of request
+//////////////////////////////////////////////////////////////////////////////////
+//
+//	const QLatin1String sUsername = QLatin1String("__username");
+//	const QLatin1String sPassword = QLatin1String("__password");
+//	const QLatin1String sFirstName = QLatin1String("__first_name");
+//	const QLatin1String sLastName = QLatin1String("__last_name");
+//	const QLatin1String sBirthday = QLatin1String("__birthday");
+//	const QLatin1String sGender = QLatin1String("__gender");
+//	const QLatin1String sErrorMessage = QLatin1String("__error_message");
+//	const QLatin1String sAvatar = QLatin1String("__avatar");
+//	const QLatin1String sFriendList = QLatin1String("__friend_list");
+//////////////////////////////////////////////////////////////////////////////////
+//} // namespace keys
+//////////////////////////////////////////////////////////////////////////////////
 
 //
 //	class CRequest

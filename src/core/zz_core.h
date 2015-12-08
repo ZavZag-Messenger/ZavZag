@@ -146,23 +146,18 @@ typedef QHash<t_KeyType, QVariant> t_RequestData;
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace keys {// Keys for the values of request
-////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
 
-// Authentication
-static const QString sUsername;
-static const QString sPassword;
-// User Info
-static const QString sFirstName;
-static const QString sLastName;
-static const QString sBirthday;
-static const QString sGender;
-static const QString sAvatar;
-static const QString sFriendList;
-
-// Other
-static const QString sErrorMessage;
-
-////////////////////////////////////////////////////////////////////////////////
+	const QString sUsername = QLatin1String( "__username" );
+	const QString sPassword = QLatin1String( "__password" );
+	const QString sFirstName = QLatin1String( "__first_name" );
+	const QString sLastName = QLatin1String( "__last_name" );
+	const QString sBirthday = QLatin1String( "__birthday" );
+	const QString sGender = QLatin1String( "__gender" );
+	const QString sErrorMessage = QLatin1String( "__error_message" );
+	const QString sAvatar = QLatin1String( "__avatar" );
+	const QString sFriendList = QLatin1String( "__friend_list" );
+	////////////////////////////////////////////////////////////////////////////////
 } // namespace keys
 ////////////////////////////////////////////////////////////////////////////////
 

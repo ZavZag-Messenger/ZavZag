@@ -116,7 +116,7 @@ uint srv::CDataManager::registerUser( zz::CUserInfo const& info, uint unPwdHash 
 	ZZ_ASSERT( oBrDay.isValid() );
 	QString sDate = oBrDay.toString( QString( "yyyy-MM-dd" ) );
 	zz::EGender eGender = info.getGender();
-	//ZZ_ASSERT( eGender != zz::EGender::Undefined );
+	ZZ_ASSERT( eGender != zz::EGender::Undefined );
 
 	QSqlQuery oQuery;
 	oQuery.exec( QString( "INSERT INTO user_info"

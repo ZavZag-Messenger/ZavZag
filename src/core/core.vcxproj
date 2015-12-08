@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
+    <ProjectGuid>{244E1441-A499-4F83-8805-54A0A0F4995C}</ProjectGuid>
     <Keyword>Qt4VSv1.0</Keyword>
     <ProjectName>zz_core</ProjectName>
   </PropertyGroup>
