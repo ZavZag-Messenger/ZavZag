@@ -1,26 +1,79 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+//////////////////////////////////////////////////
+//	includes
+//////////////////////////////////////////////////
 #include <QMainWindow>
+#include <QStatusBar>
+#include "loginpage.h"
+#include "connection.h"
+#include "zz_utility.h"
 
-#include "user.h"
+
+namespace zz_cl
+{
 
 
-class MainWindow : public QMainWindow
+
+
+
+
+//////////////////////////////////////////////////
+//	This is main window
+//////////////////////////////////////////////////
+class CMainWindow : public QMainWindow
 {
     Q_OBJECT
+public:
+	//
+	//	construector
+	//
+	CMainWindow( QWidget* pParent = nullptr );
+	//
+	//	destructor
+	//
+    ~CMainWindow();
+
+public slots: // maybe private slots:
+	//
+	//	open LogIn page slot 
+	//
+    void openLogInPage();
+	//
+	//	open maine page slot
+	//
+	void openMainPage( zz::CUserInfo* pUser );
+	//
+	//	open loading bar
+	//
+	void makeStatusBar();
 
 public:
-    MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-public slots:
-    void openLogInPage();
-    void openMainPage();
+	//
+	//	connect to server
+	//
+	void connect();
 
 private:
-    CUser* createUser();
+	//
+	//	set connections
+	//
+	void setConnections();
+
+private:
+	//
+	//	members
+	//
+	CConnection* m_pConnection;
+	CLogInPage* m_pLoginPage;
+	QStatusBar* m_pStatusBar;
 
 };
 
+
+} // namespace zz_cl
+
+
 #endif // MAINWINDOW_H
+//	end of file

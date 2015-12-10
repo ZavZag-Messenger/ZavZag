@@ -41,13 +41,7 @@
     <ClCompile Include="GeneratedFiles\qrc_cl_cmainwindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="frienditem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="friendlist.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="login.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mainpage.cpp">
@@ -56,23 +50,11 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="message.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="messagebox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="register.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="user.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_login.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_login.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_mainpage.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -98,13 +80,46 @@
     <ClCompile Include="GeneratedFiles\Release\moc_register.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="messagestorylayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_loginpage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_loginpage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="loginpage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_login.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_login.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="login.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="friendwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="message.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_connection.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_connection.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="connection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="cl_cmainwindow.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="login.h">
-      <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="mainpage.h">
       <Filter>Header Files</Filter>
@@ -118,18 +133,27 @@
     <CustomBuild Include="register.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="loginpage.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="login.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="friendlist.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="friendwidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="connection.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="frienditem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="friendlist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="user.h">
+    <ClInclude Include="messagestorylayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

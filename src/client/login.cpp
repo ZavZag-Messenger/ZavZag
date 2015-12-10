@@ -1,107 +1,111 @@
 #include "login.h"
-#include "register.h"
-
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QGroupBox>
+#include "zz_utility.h"
 #include <QLabel>
 #include <QSplitter>
 
 
-CLogIn::CLogIn(QWidget *pParent) : QWidget(pParent)
+namespace zz_cl
 {
-    QHBoxLayout *pLayout = new QHBoxLayout(this);
-    setLayout(pLayout);
 
-    makePageLeftSide(pLayout);
 
-}
-
-void CLogIn::makePageLeftSide(QLayout *pLayout)
+CLogIn::CLogIn( QWidget* pParent )
+		: QWidget( pParent )
 {
-    QVBoxLayout *pLeftSideLayout = new QVBoxLayout();
-    pLayout->addItem(pLeftSideLayout);
+	QHBoxLayout *pLayout = new QHBoxLayout( this );
+	setLayout( pLayout );
 
-    QHBoxLayout *pLoginLayout = new QHBoxLayout();
-    pLeftSideLayout->addItem(pLoginLayout);
+	makeUserName( pLayout );
+	makePassword( pLayout );
+	makeLogInButton( pLayout );
 
-    makeLogIn(pLoginLayout);
-    makePassword(pLoginLayout);
-    makeLogInButton(pLoginLayout);
-    makeRegister(pLeftSideLayout);
+	setConnections();
+
+	setFixedSize( sizeHint() );
 }
 
 
-void CLogIn::makeLogIn(QLayout *pLayout)
+void CLogIn::makeUserName( QLayout* pLayout )
 {
-    QVBoxLayout *pLoginLayout = new QVBoxLayout();
-    pLayout->addItem(pLoginLayout);
+	QVBoxLayout *pLoginLayout = new QVBoxLayout;
+	pLayout->addItem( pLoginLayout );
 
-    QLabel *pTitle = new QLabel("Log In", this);
-    pLoginLayout->addWidget(pTitle);
+	QLabel *pTitle = new QLabel( "Log In", this );
+	pLoginLayout->addWidget( pTitle );
 
-    m_pLogin = new QLineEdit(this);
-    m_pLogin->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    m_pLogin->setMaxLength(8);
+	m_pUserName = new QLineEdit( this );
+	m_pUserName->setFixedSize( m_pUserName->sizeHint() );
+	m_pUserName->setMaxLength( 8 );
 
-    pLoginLayout->addWidget(m_pLogin);
+	pLoginLayout->addWidget( m_pUserName );
 }
 
 
-void CLogIn::makePassword(QLayout *pLayout)
+void CLogIn::makePassword( QLayout* pLayout )
 {
-    QVBoxLayout *pPasswordLayout = new QVBoxLayout();
-    pLayout->addItem(pPasswordLayout);
+	QVBoxLayout *pPasswordLayout = new QVBoxLayout;
+	pLayout->addItem( pPasswordLayout );
 
-    QLabel *pTitle = new QLabel("Password", this);
-    pPasswordLayout->addWidget(pTitle);
+	QLabel *pTitle = new QLabel( "Password", this );
+	pPasswordLayout->addWidget( pTitle );
 
-    m_pPassword = new QLineEdit(this);
-    m_pPassword->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    m_pPassword->setMaxLength(8);
-    m_pPassword->setEchoMode(QLineEdit::Password);
+	m_pPassword = new QLineEdit( this );
+	m_pPassword->setFixedSize( m_pPassword->sizeHint() );
+	m_pPassword->setMaxLength( 8 );
+	m_pPassword->setEchoMode( QLineEdit::Password );
 
-    pPasswordLayout->addWidget(m_pPassword);
+	pPasswordLayout->addWidget( m_pPassword );
 }
 
 
-void CLogIn::makeLogInButton(QLayout *pLayout)
-{   
-    QVBoxLayout *pLoginButtonLayout = new QVBoxLayout();
-    pLayout->addItem(pLoginButtonLayout);
-
-    QSplitter *pSpliter = new QSplitter(this);
-    pLoginButtonLayout->addWidget(pSpliter);
-
-    m_pLoginButton = new QPushButton("Log in", this);
-    m_pLoginButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-
-    pLoginButtonLayout->addWidget(m_pLoginButton);
-
-    QObject::connect(m_pLoginButton, SIGNAL(clicked(bool)), this, SLOT(loginRequest()));
-}
-
-
-void CLogIn::makeRegister(QLayout *pLayout)
+void CLogIn::makeLogInButton( QLayout* pLayout )
 {
-    QGroupBox *pRegister = new CRegister("Register", this);
-    pLayout->addWidget(pRegister);
+	QVBoxLayout *pLoginButtonLayout = new QVBoxLayout();
+	pLayout->addItem( pLoginButtonLayout );
 
-    QObject::connect(pRegister, SIGNAL(registerClicked()), this, SLOT(registerRequest()));
+	QSplitter *pSpliter = new QSplitter( this );
+	pLoginButtonLayout->addWidget( pSpliter );
+
+	m_pLoginButton = new QPushButton( "Log in", this );
+	m_pLoginButton->setFixedSize( m_pLoginButton->sizeHint() );
+
+	pLoginButtonLayout->addWidget( m_pLoginButton );
 }
 
 
-void CLogIn::loginRequest()
+
+void CLogIn::setConnections()
 {
-    emit loginClicked();
+	QObject::connect( m_pLoginButton, SIGNAL( clicked( bool ) ), this, SLOT( loginRequest() ) );
 }
 
 
-void CLogIn::registerRequest()
+void CLogIn::sendRequest()
 {
-    emit registerClicked();
+	if ( !isValid() )
+	{
+		return;
+	}
+
+	zz::CUserInfo userInfo;
+	userInfo.setUsername( m_pUserName->text() );
+	userInfo.setPassword( m_pPassword->text() );
+
+	zz::CRequest* pRequest = new zz::CRequest( zz::ERequestType::Login, userInfo.toRequestData() );
+
+	CConnection* pConnection = CConnection::getInstance();
+	pConnection->sendRequest( pRequest );
 }
 
 
+bool CLogIn::isValid() const
+{
+	bool bUserName = !m_pUserName->text().isEmpty();
+	bool bPassword = !m_pPassword->text().isEmpty();
+
+	return (bUserName && bPassword);
+}
 
 
+} // namespace zz_cl
+
+// end of file

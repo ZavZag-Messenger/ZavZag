@@ -1,8 +1,10 @@
 #ifndef CREGISTER_H
 #define CREGISTER_H
 
+//////////////////////////////////////////////////////////////////////////
+//	includes
+//////////////////////////////////////////////////////////////////////////
 #include <QWidget>
-#include <QGroupBox>
 #include <QLayout>
 #include <QLineEdit>
 #include <QDateEdit>
@@ -10,13 +12,26 @@
 #include <QPushButton>
 
 
-class CRegister : public QGroupBox
+namespace zz_cl
+{
+
+
+//////////////////////////////////////////////////////////////////////////
+//	This class is register widget
+//////////////////////////////////////////////////////////////////////////
+class CRegister : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CRegister(const QString & title, QWidget *parent = 0);
+	//
+	//	constructor
+	//
+	explicit CRegister( const QString & sTitle, QWidget *pParent = nullptr );
 
 private:
+	//
+	//	make functions
+	//
     void makeFirstNameField(QLayout *pLayout);
     void makeLastNameField(QLayout *pLayout);
     void makeUserNameField(QLayout *pLayout);
@@ -25,14 +40,36 @@ private:
     void makeBirthdayField(QLayout *pLayout);
     void makeRegisterButton(QLayout *pLayout);
 
-signals:
-    void registerClicked();
+private:
+	//
+	//
+	//
+//	void setConnections();
+	//
+	//	returns true if there are all required datas
+	//
+	bool isValid() const;
 
-public slots:
+signals:
+	//
+	//	register signals
+	//
+ //   void registerClicked();
+
+public slots:	//	maybe private slots
+	//
+	//	register request
+	//
     void registerRequest();
+	//
+	//	password edited
+	//
     void passwordEdited();
 
 private:
+	//
+	//	members
+	//
     QLineEdit *m_pFirstNameField;
     QLineEdit *m_pLastNameField;
     QLineEdit *m_pUserNameField;
@@ -45,4 +82,8 @@ private:
 };
 
 
+} // namespace zz_cl
+
+
 #endif // CREGISTER_H
+// end of file

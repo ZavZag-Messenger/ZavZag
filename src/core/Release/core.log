@@ -1,0 +1,14 @@
+﻿Build started 12/9/2015 2:29:03 PM.
+     1>Project "C:\Users\Levgas\Documents\Visual Studio 2013\Projects\ZavZag\src\core\core.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I.\GeneratedFiles /I. /I"C:\programs\QT_4.7.2-2\include" /I.\GeneratedFiles\Release /I"C:\programs\QT_4.7.2-2\include\QtCore" /nologo /W1 /WX- /O2 /Oy- /D UNICODE /D WIN32 /D QT_LARGEFILE_SUPPORT /D QT_DLL /D QT_NO_DEBUG /D NDEBUG /D QT_CORE_LIB /D CORE_LIB /D _WINDLL /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GeneratedFiles\Debug\moc_zz_socket.cpp zz_socket.cpp
+         moc_zz_socket.cpp
+     1>c:\users\levgas\documents\visual studio 2013\projects\zavzag\src\core\generatedfiles\debug\../../zz_socket.h(24): fatal error C1083: Cannot open include file: 'QTcpSocket': No such file or directory
+         zz_socket.cpp
+     1>c:\users\levgas\documents\visual studio 2013\projects\zavzag\src\core\zz_socket.h(24): fatal error C1083: Cannot open include file: 'QTcpSocket': No such file or directory
+         Generating Code...
+     1>Done Building Project "C:\Users\Levgas\Documents\Visual Studio 2013\Projects\ZavZag\src\core\core.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.74

@@ -19,8 +19,27 @@
 |   Type    | Size: N| Variant Hash... |
 |   1 Byte  | 4 Byte |     N Byte      |
 +======================================+
-
 */
+
+//
+//  Initialization of request keys 
+//
+//////////////////////////////////////////////////////////////////////////////////
+//namespace keys {// Keys for the values of request
+//////////////////////////////////////////////////////////////////////////////////
+//
+//	const QLatin1String sUsername = QLatin1String("__username");
+//	const QLatin1String sPassword = QLatin1String("__password");
+//	const QLatin1String sFirstName = QLatin1String("__first_name");
+//	const QLatin1String sLastName = QLatin1String("__last_name");
+//	const QLatin1String sBirthday = QLatin1String("__birthday");
+//	const QLatin1String sGender = QLatin1String("__gender");
+//	const QLatin1String sErrorMessage = QLatin1String("__error_message");
+//	const QLatin1String sAvatar = QLatin1String("__avatar");
+//	const QLatin1String sFriendList = QLatin1String("__friend_list");
+//////////////////////////////////////////////////////////////////////////////////
+//} // namespace keys
+//////////////////////////////////////////////////////////////////////////////////
 
 //
 //	class CRequest

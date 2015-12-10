@@ -34,6 +34,8 @@ namespace zz { //
 //!	TCP socket class which allows request transmission
 class ZZ_CORE_EXPORT CSocket : public QTcpSocket
 {	
+	Q_OBJECT
+
 public:
 	//!	Constructor
 	inline CSocket( QObject* pParent = nullptr );
@@ -44,9 +46,29 @@ public:
 	//	Extended Methods
 	//
 	// Send Request
-	inline void writeRequest( CRequest const* pRequest );
-	// Receive Request
-	CRequest*   readRequest();
+	inline void sendRequest( CRequest const* pRequest );
+
+signals:
+	//
+	//	Signals
+	//
+	// Should be used to receive requests
+	void sigNewRequest( zz::CRequest* );
+	// Emmits when the last request was sent
+	void sigRequestWasSent();
+
+private slots:
+    //
+    //  Private Slots
+    //
+    void onReadyReed();
+	void onBytesWritten( qint64 );
+
+private:
+	//
+	//  Content
+	//
+	qint64 m_nBytesShouldBeWritten;
 };
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -58,26 +80,41 @@ public:
 //! Constructor
 inline CSocket::CSocket(QObject* pParent)
 	: QTcpSocket( pParent )
-{}
+{
+	// Make Connections
+	Q_ASSERT( QObject::connect( 
+		this, 
+		SIGNAL( readyRead() ), 
+		SLOT( onReadyReed() ) ) );
+	Q_ASSERT( QObject::connect( 
+		this, 
+		SIGNAL( bytesWritten( qint64 ) ), 
+		SLOT( onBytesWritten( qint64 ) ) ) );
+}
 
-// writeRequest
-inline void zz::CSocket::writeRequest( CRequest const* pRequest )
+// sendRequest
+inline void CSocket::sendRequest( CRequest const* pRequest )
 {
 	if(!pRequest)
 		return;
 	QByteArray aBuffer = pRequest->serialize();
-	qint64 nWrittenBytes = write( aBuffer );
-	// Synchrony
-	if( nWrittenBytes != aBuffer.size() || !waitForBytesWritten())
-	{
-		QString sErrMsg = errorString();
-		throw CException( sErrMsg );
-	}
+	m_nBytesShouldBeWritten = aBuffer.size();
+	write( aBuffer );
+}
+
+// onBytesWritten
+inline void CSocket::onBytesWritten( qint64 nWrittenBytes )
+{
+	if (nWrittenBytes < m_nBytesShouldBeWritten)
+		// Weit to next call
+		return;
+	m_nBytesShouldBeWritten = 0;
+	emit sigRequestWasSent();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 } // namespace zz
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // ZZ_REQUEST_H
+#endif // ZZ_SOCKET_H
 /* end of file */

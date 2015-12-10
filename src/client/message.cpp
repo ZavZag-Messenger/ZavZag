@@ -1,20 +1,22 @@
 #include "message.h"
-#include <QLabel>
-#include <QVBoxLayout>
 
-CMessage::CMessage(const QString & sMessage, QWidget *pParent)
-    : QWidget(pParent)
+
+CMessage::CMessage( const QString & sText, bool bSent, QWidget *pParent )
+			: QTextEdit( pParent ),
+			  m_bSent( bSent )
 {
-    QVBoxLayout *pVLayout = new QVBoxLayout();
-    pVLayout->setMargin(0);
-    setLayout(pVLayout);
+	setReadOnly( true );
 
-    QLabel *pLabel = new QLabel(sMessage, this);
-    pLabel->setAutoFillBackground(true);
-    pLabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+	setPlainText( sText );
 
-    pVLayout->addWidget(pLabel);
-
-    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+	if ( bSent )
+	{
+		setStyleSheet( "background: blue; color: white" );
+		setAlignment( Qt::AlignLeft | Qt::AlignVCenter );
+	}
+	else
+	{
+		setStyleSheet( "background: green; color: white" );
+		setAlignment( Qt::AlignLeft | Qt::AlignVCenter );
+	}
 }
-

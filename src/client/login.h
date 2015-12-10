@@ -1,37 +1,71 @@
 #ifndef CLOGIN_H
 #define CLOGIN_H
 
+
+///////////////////////////////////////////////
+//	includes
+///////////////////////////////////////////////
 #include <QWidget>
-#include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QLayout>
+#include "connection.h"
 
+
+namespace zz_cl
+{
+
+
+///////////////////////////////////////////////
+//	This class is login widget
+///////////////////////////////////////////////
 class CLogIn : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    explicit CLogIn(QWidget *pParent = 0);
-
-signals:
-    void registerClicked();
-    void loginClicked();
-
-public slots:
-    void registerRequest();
-    void loginRequest();
+	explicit CLogIn( QWidget* pParent = nullptr );
 
 private:
-    void makePageLeftSide(QLayout *pLayout);
-    void makeLogIn(QLayout *pLayout);
-    void makePassword(QLayout *pLayout);
-    void makeLogInButton(QLayout *pLayout);
-    void makeRegister(QLayout *pLayout);
+	//
+	//	make user name
+	//
+	void makeUserName( QLayout *pLayout );
+	//
+	//	make password ( this part maybe will marge by login )
+	//
+	void makePassword( QLayout *pLayout );
+	//
+	//	make login button ( this part maybe will marge by login )
+	//
+	void makeLogInButton( QLayout *pLayout );
 
 private:
-    QLineEdit *m_pLogin;
-    QLineEdit *m_pPassword;
-    QPushButton *m_pLoginButton;
+	//
+	//	set connections
+	//
+	void setConnections();
+	//
+	//	returns true if username and password wrote
+	//
+	bool isValid() const;
+
+private slots:
+	//
+	void sendRequest();
+
+private:
+	//
+	//	members
+	//	
+	QLineEdit* m_pUserName;
+	QLineEdit* m_pPassword;
+	QPushButton* m_pLoginButton;
 
 };
 
-#endif // CLOGIN_H
+
+} // namespace zz_cl
+
+
+#endif // CLOGIN_PAGE_H
+// end of file

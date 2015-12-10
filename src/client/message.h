@@ -1,15 +1,35 @@
 #ifndef CMESSAGE_H
 #define CMESSAGE_H
-
+////////////////////////////////////////////////////////////////////////
+//
+//	includes
+//
+////////////////////////////////////////////////////////////////////////
 #include <QWidget>
-
-class CMessage : public QWidget
+#include <QColor>
+#include <QTextEdit>
+////////////////////////////////////////////////////////////////////////
+//
+//	This class is message widget
+//
+////////////////////////////////////////////////////////////////////////
+class CMessage : public QTextEdit
 {
 public:
-    explicit CMessage(const QString & sMessage, QWidget *pParent = 0);
+	//
+	//	constructor
+	//
+	explicit CMessage( const QString & sText, bool bSent, QWidget *pParent = nullptr );
+
 
 private:
+	//
+	//	members
+	//
+	bool m_bSent;
 
 };
 
+
 #endif // CMESSAGE_H
+//	end of file

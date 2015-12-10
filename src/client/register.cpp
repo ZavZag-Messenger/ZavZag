@@ -1,18 +1,19 @@
 #include "register.h"
+#include "connection.h"
+#include "zz_utility.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QCheckBox>
 #include <QLabel>
-#include <QRegExpValidator>
-#include <QRegExp>
 
 
-CRegister::CRegister(const QString & title, QWidget *parent)
-           : QGroupBox(title, parent)
+namespace zz_cl
 {
-    setCheckable(true);
-    setChecked(false);
 
+
+CRegister::CRegister(const QString & title, QWidget* pParent)
+           : QWidget( pParent )
+{
     QVBoxLayout *pLayout = new QVBoxLayout(this);
     setLayout(pLayout);
 
@@ -97,7 +98,7 @@ void CRegister::makePasswordField(QLayout *pLayout)
 
 void CRegister::makeGenderField(QLayout *pLayout)
 {
-    QLabel *pTitle = new QLabel("Gender *", this);
+    QLabel *pTitle = new QLabel("Gender", this);
     pLayout->addWidget(pTitle);
 
     QHBoxLayout *pGendLayout = new QHBoxLayout();
@@ -106,6 +107,7 @@ void CRegister::makeGenderField(QLayout *pLayout)
     m_pGender = new QButtonGroup(this);
 
     QCheckBox *pMale = new QCheckBox("male", this);
+	pMale->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
     pMale->setCheckable(true);
     pMale->setChecked(false);
     pGendLayout->addWidget(pMale);
@@ -113,6 +115,7 @@ void CRegister::makeGenderField(QLayout *pLayout)
     m_pGender->addButton(pMale);
 
     QCheckBox *pFeMale = new QCheckBox("female", this);
+	pFeMale->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
     pFeMale->setCheckable(true);
     pFeMale->setChecked(false);
     pGendLayout->addWidget(pFeMale);
@@ -127,6 +130,7 @@ void CRegister::makeBirthdayField(QLayout *pLayout)
     pLayout->addWidget(pTitle);
 
     m_pBirthdayField = new QDateEdit(this);
+	m_pBirthdayField->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
 
     pLayout->addWidget(m_pBirthdayField);
 }
@@ -139,13 +143,42 @@ void CRegister::makeRegisterButton(QLayout *pLayout)
 
     pLayout->addWidget(m_pRegisterButton);
 
-    QObject::connect(m_pRegisterButton, SIGNAL(clicked(bool)), this, SLOT(registerRequest()));
+	QObject::connect( m_pRegisterButton, SIGNAL( clicked( bool ) ), this, SLOT( registerRequest() ) );
 }
 
 
 void CRegister::registerRequest()
 {
-    emit registerClicked();
+	if ( !isValid() )
+	{
+		//
+	}
+
+	zz::CUserInfo userInfo;
+	userInfo.setUsername( m_pUserNameField->text() );
+	userInfo.setFirstName( m_pFirstNameField->text() );
+	userInfo.setLastName( m_pLastNameField->text() );
+	userInfo.setPassword( m_pPasswordField->text() );
+	if ( m_pGender->checkedId() == 0 )
+	{
+		userInfo.setGender( zz::EGender::Male );
+	}
+	else if ( m_pGender->checkedId() == 1 )
+	{
+		userInfo.setGender( zz::EGender::Female );
+	}
+	else
+	{
+		userInfo.setGender( zz::EGender::Undefined );
+	}
+	userInfo.setBirthday( m_pBirthdayField->date() );
+
+
+	zz::CRequest* pRequest = new zz::CRequest( zz::ERequestType::Register, userInfo.toRequestData() );
+	ZZ_ASSERT( pRequest );
+	
+	CConnection* pConnection = CConnection::getInstance();
+	pConnection->sendRequest( pRequest );
 }
 
 
@@ -164,3 +197,20 @@ void CRegister::passwordEdited()
     QRegExpValidator *pRegValid = dynamic_cast<QRegExpValidator*>(const_cast<QValidator*>(pValidator));
     pRegValid->setRegExp(QRegExp(m_pPasswordField->text()));
 }
+
+
+bool CRegister::isValid() const
+{
+	bool bUserName = !m_pUserNameField->text().isEmpty();
+	bool bFirstName = !m_pFirstNameField->text().isEmpty();
+	bool bLastName = !m_pLastNameField->text().isEmpty();
+	bool bPassword = !m_pPasswordField->text().isEmpty();
+	bool bConfirmPassword = !m_pConfirmPasswordField->text().isEmpty();
+
+	return ( bUserName && bFirstName && bLastName && bPassword && bConfirmPassword );
+}
+
+
+} // namespace zz_cl
+
+// end of file

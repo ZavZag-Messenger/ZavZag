@@ -77,7 +77,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
-namespace zz { // ZavZag :P
+namespace zz { // [Z]av[Z]ag :P
 ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -119,49 +119,76 @@ enum class ERequestType
 //
 //	Request Keys
 //
-enum class ERequestKeys
-{
-	// User Info
-	FirstName = 0, // QString
-	LastName,      // QString
-	Username,      // QString
-	Password,      // QString
-	Birthday,      // QDateTime
-	Gender,        // Bool : true-Male | false-Female
-	Avatar,        // QImage
+//enum class ERequestKeys
+//{
+//	// User Info
+//	FirstName = 0, // QString
+//	LastName,      // QString
+//	Username,      // QString
+//	Password,      // QString
+//	Birthday,      // QDateTime
+//	Gender,        // Bool : true-Male | false-Female
+//	Avatar,        // QImage
+//
+//	ErrorMessage   // Error Message
+//};
 
+//
+//  Key type definition
+//
+typedef QString t_KeyType;
 
-	ErrorMessage
-};
+//
+//	Request Data Type Definition
+//	
+typedef QHash<t_KeyType, QVariant> t_RequestData;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace keys {// Keys for the values of request
-////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
 
-//static const char* cszUsername = "__username";
-//static const char* cszPassword = "__password";
-//static const char* cszBirthday = "__birthday";
-////////////////////////////////////////////////////////////////////////////////
+	const QString sUsername = QLatin1String( "__username" );
+	const QString sPassword = QLatin1String( "__password" );
+	const QString sFirstName = QLatin1String( "__first_name" );
+	const QString sLastName = QLatin1String( "__last_name" );
+	const QString sBirthday = QLatin1String( "__birthday" );
+	const QString sGender = QLatin1String( "__gender" );
+	const QString sErrorMessage = QLatin1String( "__error_message" );
+	const QString sAvatar = QLatin1String( "__avatar" );
+	const QString sFriendList = QLatin1String( "__friend_list" );
+	////////////////////////////////////////////////////////////////////////////////
 } // namespace keys
 ////////////////////////////////////////////////////////////////////////////////
+
 
 //
 //	Request Status
 //
-//enum class ERequestStatus
-//{
-//	Unknown = 0,
-//	Succeeded,
-//	Failed,
-//	Canceled
-//};
+enum class ERequestStatus
+{
+	Unknown = 0,
+	Succeeded,
+	Failed,
+	Canceled
+};
+
+//
+//	Gender Definition
+//
+enum class EGender
+{
+	Undefined = 0,
+	Male,
+	Female
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 //
 //	Useful Tool Functions
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline bool isValidRequest( ERequestType eType )
+inline bool isValidRequestType( ERequestType eType )
 {
 	switch ( eType )
 	{

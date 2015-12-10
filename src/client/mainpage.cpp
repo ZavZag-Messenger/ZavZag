@@ -1,38 +1,47 @@
 #include "mainpage.h"
-
 #include <QHBoxLayout>
 
 
-CMainPage::CMainPage(CUser *pUser, QWidget *pParent)
-            : QWidget(pParent),
-              m_pUser(pUser)
+namespace zz_cl
 {
-    QHBoxLayout *pLayout = new QHBoxLayout(this);
-    setLayout(pLayout);
 
-    makeMessageBox(pLayout);
-    makeFriendList(pLayout);
+
+	CMainPage::CMainPage( zz::CUserInfo* pUser, QWidget* pParent )
+            : QWidget( pParent ),
+              m_pUser( pUser )
+{
+	QHBoxLayout* pLayout = new QHBoxLayout( this );
+	setLayout( pLayout );
+
+	makeMessageBox( pLayout );
+	makeFriendList( pLayout );
+
+	QObject::connect( m_pFriendList, SIGNAL( itemChanged( QListWidgetItem* ) ), m_pFriendList, SLOT() );
 }
 
 
-void CMainPage::makeFriendList(QLayout *pLayout)
+void CMainPage::makeFriendList(QLayout* pLayout)
 {
-    m_pFriendList = new CFriendList(this);
-    pLayout->addWidget(m_pFriendList);
+	m_pFriendList = new CFriendList( this );
+	QBoxLayout* bl = qobject_cast< QBoxLayout* >( pLayout );
+	bl->addWidget( m_pFriendList);
+	m_pFriendList->setSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding );
 
-    CUser::FriendList::const_iterator cIt = m_pUser->friendList().cbegin();
-    while (cIt != m_pUser->friendList().cend())
+	/*CUser::FriendList::const_iterator cIt = m_pUser->friendList().constBegin();
+	while ( cIt != m_pUser->friendList().constEnd() )
     {
-        CFriendItem *pFriendItem = new CFriendItem(*cIt, m_pFriendList);
-        m_pFriendList->addItem(pFriendItem);
-
+        CFriendWidget *pFriendWidget = new CFriendWidget(*cIt, m_pFriendList);
+		m_pFriendList->addFriend( pFriendWidget );
         ++cIt;
-    }
+    }*/
 }
 
-void CMainPage::makeMessageBox(QLayout *pLayout)
+void CMainPage::makeMessageBox(QLayout* pLayout)
 {
-    m_pMessageBox = new CMessageBox(this);
-    pLayout->addWidget(m_pMessageBox);
+	m_pMessageBox = new CMessageBox( this );
+	QBoxLayout* bl = qobject_cast< QBoxLayout* >( pLayout );
+	bl->addWidget( m_pMessageBox ,1);
 }
 
+
+} // namespace zz_cl
