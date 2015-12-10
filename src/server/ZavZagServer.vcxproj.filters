@@ -19,6 +19,21 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="srv_server.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_srv_engine.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_srv_engine.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="srv_engin.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_srv_server.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="srv_datamanager.h">
@@ -38,6 +53,12 @@
     <CustomBuild Include="mainwindow.h">
       <Filter>Application</Filter>
     </CustomBuild>
+    <CustomBuild Include="srv_engine.h">
+      <Filter>Server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="srv_server.h">
+      <Filter>Server</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data Management">
@@ -47,7 +68,9 @@
       <UniqueIdentifier>{ab24dee3-8786-4b81-818c-cc28148dfc69}</UniqueIdentifier>
     </Filter>
     <Filter Include="Generated Files">
-      <UniqueIdentifier>{003f5a3b-d117-4177-bbc1-5bb1ef29cc77}</UniqueIdentifier>
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <ParseFiles>true</ParseFiles>
     </Filter>
     <Filter Include="Form Files">
       <UniqueIdentifier>{22e9a372-1259-4e7e-b509-beab19c2676d}</UniqueIdentifier>

@@ -1,13 +1,13 @@
 /*
 File:
-	zz_friendlist.h
+	zz_userlist.h
 
 Abstract:
 	Defines Friend List and Friend List Item classes 
 */
 
-#ifndef ZZ_FRIEND_LIST_H
-#define ZZ_FRIEND_LIST_H
+#ifndef ZZ_USER_LIST_H
+#define ZZ_USER_LIST_H
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -26,15 +26,15 @@ namespace zz { //
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-//	class CFriendListItem
+//	class CUserListItem
 //
-class CFriendListItem
+class CUserListItem
 {
 public:
 	//!	Default Constructor
-	inline CFriendListItem();
+	inline CUserListItem();
 	//!	Constructor
-	inline CFriendListItem( uint unId,
+	inline CUserListItem( uint unId,
 							QString const& sfName,
 							QString const& slName,
 							QImage  const& imgAvatar = QImage() 
@@ -62,9 +62,9 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-//	class CFriendList
+//	class CUserList
 //
-typedef QList<CFriendListItem> CFriendList;
+typedef QList<CUserListItem> CUserList;
 ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -75,12 +75,12 @@ typedef QList<CFriendListItem> CFriendList;
 ////////////////////////////////////////////////////////////////////////////////
 
 //!	Default Constructor
-inline CFriendListItem::CFriendListItem()
+inline CUserListItem::CUserListItem()
 	: m_unId( 0 )
 {}
 
 //!	Constructor
-inline CFriendListItem::CFriendListItem( uint unId,
+inline CUserListItem::CUserListItem( uint unId,
 							QString const& sfName,
 							QString const& slName,
 							QImage  const& imgAvatar
@@ -92,17 +92,17 @@ inline CFriendListItem::CFriendListItem( uint unId,
 {}
 
 // Accessors
-inline uint    CFriendListItem::getId()        const { return m_unId; }
-inline QString CFriendListItem::getFirstName() const { return m_sfName; }
-inline QString CFriendListItem::getLastName()  const { return m_slName; }
-inline QImage  CFriendListItem::getAvatar()    const { return m_imgAvatar; }
+inline uint    CUserListItem::getId()        const { return m_unId; }
+inline QString CUserListItem::getFirstName() const { return m_sfName; }
+inline QString CUserListItem::getLastName()  const { return m_slName; }
+inline QImage  CUserListItem::getAvatar()    const { return m_imgAvatar; }
 
 ////////////////////////////////////////////////////////////////////////////////
 } // namespace zz
 ////////////////////////////////////////////////////////////////////////////////
 
 //	Meta Type Declaration
-Q_DECLARE_METATYPE( zz::CFriendListItem );
-Q_DECLARE_METATYPE( zz::CFriendList );
+Q_DECLARE_METATYPE( zz::CUserListItem );
+Q_DECLARE_METATYPE( zz::CUserList );
 
-#endif // ZZ_FRIEND_LIST_H
+#endif // ZZ_USER_LIST_H

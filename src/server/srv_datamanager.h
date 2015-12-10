@@ -26,6 +26,8 @@ Abstract:
 #include <QSqlQuery>
 #include <QSqlQuery>
 #include <QSqlError>
+
+#include <QDir>
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,10 +66,11 @@ public:
 	// If user not found returns 0.
 	uint getUserId( QString const& sUsername,
 					uint           unPwdHash );
-
+	uint getUserId( QString const& sUsername );
 	// Retusrnes user info 
 	zz::CUserInfo getUserInfo( uint unUserId );
-
+	// Returnes friend list of specified user
+	zz::CUserList getFriendList( uint unUserId );
 
 
 protected:
@@ -87,7 +90,7 @@ private:
 	//
 	QSqlDatabase m_oDB;
 
-	// 
+	// Usefull Constants
 	static const QLatin1String m_csDataFileName;
 	static const QLatin1String m_csDataFilePath;
 
@@ -109,13 +112,18 @@ inline CDataManager::CDataManager()
 	info.setLastName( "Hakhverdyan" );
 	info.setGender( zz::EGender::Male );
 	info.setBirthday( QDate( 1995, 3, 16 ) );
+	info.setUsername( "AramAmv" );
 	// 
-	registerUser( info, 656848 );
+	//registerUser( info, qHash( info.getUsername() ) );
+	zz::CUserInfo foundInfo = getUserInfo( 1 );
 }
 
 //! Destructor
 inline CDataManager::~CDataManager()
-{}
+{
+	QDir oDataFileDir;
+	oDataFileDir.rmdir( m_csDataFilePath );
+}
 
 // checkExecution
 inline void CDataManager::checkExecution( QSqlQuery const& query )

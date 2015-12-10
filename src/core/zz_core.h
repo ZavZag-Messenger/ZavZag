@@ -45,6 +45,8 @@
 #include <QDateTime>
 #include <QDataStream>
 #include <QTextStream>
+#include <QSharedPointer>
+#include <QScopedPointer>
 #include <QCoreApplication>
 #include <QtCore/qglobal.h>
 ////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +97,12 @@ inline QString qtr( QLatin1String const& cszText )
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-
+////////////////////////////////////////////////////////////////////////////////
+//
+//	Global Port Definitions
+//
+static const int g_nPort = 5476;
+////////////////////////////////////////////////////////////////////////////////
 
 //
 //	Request Types
@@ -147,16 +154,16 @@ typedef QHash<t_KeyType, QVariant> t_RequestData;
 ////////////////////////////////////////////////////////////////////////////////
 namespace keys {// Keys for the values of request
 	////////////////////////////////////////////////////////////////////////////////
-
-	const QString sUsername = QLatin1String( "__username" );
-	const QString sPassword = QLatin1String( "__password" );
-	const QString sFirstName = QLatin1String( "__first_name" );
-	const QString sLastName = QLatin1String( "__last_name" );
-	const QString sBirthday = QLatin1String( "__birthday" );
-	const QString sGender = QLatin1String( "__gender" );
-	const QString sErrorMessage = QLatin1String( "__error_message" );
-	const QString sAvatar = QLatin1String( "__avatar" );
-	const QString sFriendList = QLatin1String( "__friend_list" );
+	const QString sUserId       = QString( "__user_id" );
+	const QString sUsername     = QString( "__username" );
+	const QString sPassword     = QString( "__password" );
+	const QString sFirstName    = QString( "__first_name" );
+	const QString sLastName     = QString( "__last_name" );
+	const QString sBirthday     = QString( "__birthday" );
+	const QString sGender       = QString( "__gender" );
+	const QString sErrorMessage = QString( "__error_message" );
+	const QString sAvatar       = QString( "__avatar" );
+	const QString sFriendList   = QString( "__friend_list" );
 	////////////////////////////////////////////////////////////////////////////////
 } // namespace keys
 ////////////////////////////////////////////////////////////////////////////////

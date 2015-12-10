@@ -5,31 +5,26 @@ CMainWindow::CMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	
-	connect( ui.pushButton, SIGNAL( clicked() ), SLOT( onCreateTables() ) );
+	m_pServer = new srv::CServer( this );
+	ZZ_ASSERT( connect( ui.btnStart, SIGNAL( clicked() ), 
+		       m_pServer, SLOT( onStart() ) )
+			 );
+	ZZ_ASSERT( connect( ui.btnStop, SIGNAL( clicked( ) ),
+		m_pServer, SLOT( onStop() ) )
+		);
 }
 
 CMainWindow::~CMainWindow()
 {
+}
+
+
+void CMainWindow::onStart()
+{
 
 }
 
 
-void CMainWindow::onCreateTables()
+void CMainWindow::onStop( )
 {
-	uint nHash = qHash( QString( "Aramamv@mail.ru" ) );
-	try
-	{
-		m_pDataManager.reset( new srv::CDataManager( ) );
-	}
-	catch (zz::CException const& oErr)
-	{
-		QMessageBox::critical( 0, "Error", oErr.what() );
-		return;
-	}
-	catch (std::exception const& oErr)
-	{
-		QMessageBox::critical( 0, "Error", oErr.what( ) );
-		return;
-	}
 }

@@ -173,7 +173,7 @@
       </Command>
     </CustomBuild>
     <ClInclude Include="zz_core.h" />
-    <ClInclude Include="zz_friendlist.h" />
+    <ClInclude Include="zz_userlist.h" />
     <ClInclude Include="zz_request.h" />
     <CustomBuild Include="zz_socket.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" </Command>

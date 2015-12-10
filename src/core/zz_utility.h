@@ -16,8 +16,8 @@ Abstract:
 #	include "zz_core.h"
 #endif
 
-#ifndef ZZ_FRIEND_LIST_H
-#	include "zz_friendlist.h"
+#ifndef ZZ_USER_LIST_H
+#	include "zz_userlist.h"
 #endif
 
 // Qt includes
@@ -53,6 +53,10 @@ public:
 	inline void setPassword( QString const& sPwd );
 	inline QString getPassword() const;
 
+	// Get/Set User ID
+	inline void setUserID( uint unId );
+	inline uint getUserID() const;
+
 	// Get/Set First Name
 	inline void setFirstName( QString const& sfName );
 	inline QString getFirstName() const;
@@ -74,15 +78,14 @@ public:
 	inline QImage getAvatar() const;
 
 	// Get/Set Friend List
-	inline void setFriendList( CFriendList const& lstFriends );
-	inline CFriendList getFriendList() const;
+	inline void setFriendList( CUserList const& lstFriends );
+	inline CUserList getFriendList() const;
 
 public:
-	// 
-	//	Converters
-	//	
 	// Converts User Info to Request Data type 
 	inline t_RequestData toRequestData() const;
+	// Is Empty
+	inline bool isEmpty() const;
 
 private:
 	//
@@ -138,6 +141,21 @@ inline QString CUserInfo::getPassword() const
 {
 	return m_hshData.value( keys::sPassword ).toString();
 }
+
+// setUserID
+inline void CUserInfo::setUserID( uint unId )
+{
+	if (unId == 0)
+		return;
+	m_hshData.insert( keys::sUserId, QVariant( unId ) );
+}
+
+// getUserID
+inline uint CUserInfo::getUserID() const
+{
+	return m_hshData.value( keys::sUserId ).toUInt( );
+}
+
 
 // setFirstName
 inline void CUserInfo::setFirstName( QString const& sfName )
@@ -212,23 +230,26 @@ inline QImage CUserInfo::getAvatar() const
 }
 
 // setFriendList
-inline void CUserInfo::setFriendList( CFriendList const& lstFriends )
+inline void CUserInfo::setFriendList( CUserList const& lstFriends )
 {
 	if (lstFriends.isEmpty())
 		return;
 	QVariant vtFriendList;
-	vtFriendList.setValue<CFriendList>( lstFriends );
+	vtFriendList.setValue<CUserList>( lstFriends );
 	m_hshData.insert( keys::sFriendList, vtFriendList );
 }
 
 // getFriendList
-inline CFriendList CUserInfo::getFriendList() const
+inline CUserList CUserInfo::getFriendList() const
 {
 	QVariant vtImage = m_hshData.value( keys::sFriendList );
-	return vtImage.value<CFriendList>();
+	return vtImage.value<CUserList>();
 }
 
-	////////////////////////////////////////////////////////////////////////////////
+// isEmpty
+inline bool  CUserInfo::isEmpty() const { return m_hshData.isEmpty(); }
+
+////////////////////////////////////////////////////////////////////////////////
 } // namespace zz
 ////////////////////////////////////////////////////////////////////////////////
 
