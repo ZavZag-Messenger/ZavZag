@@ -41,7 +41,11 @@
     <ClInclude Include="zz_request.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="zz_friendlist.h">
+=======
+    <ClInclude Include="zz_userlist.h">
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,7 @@
 build/*
-
+src/*/GeneratedFiles/* 
 *.opensdf
 *.sdf
 *.suo
+*.user
+*.sqlite

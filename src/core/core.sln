@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
+<<<<<<< HEAD
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zz_core", "core.vcxproj", "{244E1441-A499-4F83-8805-54A0A0F4995C}"
+=======
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zz_core", "core.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

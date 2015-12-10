@@ -8,4 +8,8 @@
 #	include "../core/zz_utility.h"
 #endif
 
+<<<<<<< HEAD
 /*end of file*/
+=======
+/*end of file*/
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361

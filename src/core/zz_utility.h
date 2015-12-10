@@ -16,8 +16,13 @@ Abstract:
 #	include "zz_core.h"
 #endif
 
+<<<<<<< HEAD
 #ifndef ZZ_FRIEND_LIST_H
 #	include "zz_friendlist.h"
+=======
+#ifndef ZZ_USER_LIST_H
+#	include "zz_userlist.h"
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
 #endif
 
 // Qt includes
@@ -53,6 +58,13 @@ public:
 	inline void setPassword( QString const& sPwd );
 	inline QString getPassword() const;
 
+<<<<<<< HEAD
+=======
+	// Get/Set User ID
+	inline void setUserID( uint unId );
+	inline uint getUserID() const;
+
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
 	// Get/Set First Name
 	inline void setFirstName( QString const& sfName );
 	inline QString getFirstName() const;
@@ -74,6 +86,7 @@ public:
 	inline QImage getAvatar() const;
 
 	// Get/Set Friend List
+<<<<<<< HEAD
 	inline void setFriendList( CFriendList const& lstFriends );
 	inline CFriendList getFriendList() const;
 
@@ -83,6 +96,16 @@ public:
 	//	
 	// Converts User Info to Request Data type 
 	inline t_RequestData toRequestData() const;
+=======
+	inline void setFriendList( CUserList const& lstFriends );
+	inline CUserList getFriendList() const;
+
+public:
+	// Converts User Info to Request Data type 
+	inline t_RequestData toRequestData() const;
+	// Is Empty
+	inline bool isEmpty() const;
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
 
 private:
 	//
@@ -139,6 +162,24 @@ inline QString CUserInfo::getPassword() const
 	return m_hshData.value( keys::sPassword ).toString();
 }
 
+<<<<<<< HEAD
+=======
+// setUserID
+inline void CUserInfo::setUserID( uint unId )
+{
+	if (unId == 0)
+		return;
+	m_hshData.insert( keys::sUserId, QVariant( unId ) );
+}
+
+// getUserID
+inline uint CUserInfo::getUserID() const
+{
+	return m_hshData.value( keys::sUserId ).toUInt( );
+}
+
+
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
 // setFirstName
 inline void CUserInfo::setFirstName( QString const& sfName )
 {
@@ -212,16 +253,25 @@ inline QImage CUserInfo::getAvatar() const
 }
 
 // setFriendList
+<<<<<<< HEAD
 inline void CUserInfo::setFriendList( CFriendList const& lstFriends )
+=======
+inline void CUserInfo::setFriendList( CUserList const& lstFriends )
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
 {
 	if (lstFriends.isEmpty())
 		return;
 	QVariant vtFriendList;
+<<<<<<< HEAD
 	vtFriendList.setValue<CFriendList>( lstFriends );
+=======
+	vtFriendList.setValue<CUserList>( lstFriends );
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
 	m_hshData.insert( keys::sFriendList, vtFriendList );
 }
 
 // getFriendList
+<<<<<<< HEAD
 inline CFriendList CUserInfo::getFriendList() const
 {
 	QVariant vtImage = m_hshData.value( keys::sFriendList );
@@ -229,6 +279,18 @@ inline CFriendList CUserInfo::getFriendList() const
 }
 
 	////////////////////////////////////////////////////////////////////////////////
+=======
+inline CUserList CUserInfo::getFriendList() const
+{
+	QVariant vtImage = m_hshData.value( keys::sFriendList );
+	return vtImage.value<CUserList>();
+}
+
+// isEmpty
+inline bool  CUserInfo::isEmpty() const { return m_hshData.isEmpty(); }
+
+////////////////////////////////////////////////////////////////////////////////
+>>>>>>> a9b9cf482393a54bd1646a16847fc44046a69361
 } // namespace zz
 ////////////////////////////////////////////////////////////////////////////////
 
